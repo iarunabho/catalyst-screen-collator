@@ -342,7 +342,7 @@ const CourseProcessor: React.FC = () => {
           <CardTitle className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <FileSpreadsheet className="h-5 w-5" />
-              Course XML Screen Extractor
+              Catalyst Screen Collator
             </div>
             <Button
               variant="outline"
