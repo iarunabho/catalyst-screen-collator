@@ -442,11 +442,13 @@ const CourseProcessor: React.FC = () => {
                 <div>
                   <h3 className="font-semibold text-lg mb-2">Step 1: Login to Catalyst Design</h3>
                   <p>First, login to Catalyst Design platform.</p>
+                  <img src="images/step1.png" alt="Step 1: Login" className="mt-2 rounded-lg border" />
                 </div>
 
                 <div>
                   <h3 className="font-semibold text-lg mb-2">Step 2: Find Your Course</h3>
                   <p>From the Course List landing page, search for the course you need the screen list from.</p>
+                  <img src="images/step2.png" alt="Step 2: Find Course" className="mt-2 rounded-lg border" />
                 </div>
 
                 <div>
@@ -457,6 +459,7 @@ const CourseProcessor: React.FC = () => {
                     <li>Rollover "Export and Download"</li>
                     <li>Select "Download XML"</li>
                   </ol>
+                  <img src="images/step3.png" alt="Step 3: Download XML" className="mt-2 rounded-lg border" />
                 </div>
 
                 <div>
@@ -468,11 +471,13 @@ const CourseProcessor: React.FC = () => {
                       You will find <code className="bg-gray-100 px-1 rounded">Course.xml</code>
                     </li>
                   </ol>
+                  <img src="images/step4.png" alt="Step 4: Extract XML" className="mt-2 rounded-lg border" />
                 </div>
 
                 <div>
                   <h3 className="font-semibold text-lg mb-2">Step 5: Upload to Screen Collator</h3>
                   <p>Use the file upload feature above to select your Course.xml file.</p>
+                  <img src="images/step5.png" alt="Step 5: Upload to Collator" className="mt-2 rounded-lg border" />
                 </div>
 
                 <div>
@@ -488,6 +493,7 @@ const CourseProcessor: React.FC = () => {
                       Graphic Design Production folder.
                     </li>
                   </ul>
+                  <img src="images/step6.png" alt="Step 6: Process and Download" className="mt-2 rounded-lg border" />
                 </div>
 
                 <div className="bg-yellow-50 border border-yellow-200 rounded p-4">
