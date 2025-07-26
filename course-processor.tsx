@@ -348,11 +348,11 @@ const CourseProcessor: React.FC = () => {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => setShowUserGuide(true)}
+                onClick={() => setShowUserGuide(!showUserGuide)}
                 className="flex items-center gap-2"
               >
                 <HelpCircle className="h-4 w-4" />
-                User Guide
+                {showUserGuide ? "Hide User Guide" : "User Guide"}
               </Button>
             </CardTitle>
           </CardHeader>
