@@ -8,6 +8,7 @@ if (mixpanelToken) {
     debug: true,
     track_pageview: true,
     persistence: "localStorage",
+    ignore_dnt: true,
   })
 }
 
@@ -24,7 +25,6 @@ export const Mixpanel = {
   },
   track: (name: string, props?: object) => {
     if (mixpanelToken) {
-      console.log("MIXPANEL TRACK", { name, props })
       mixpanel.track(name, props)
     }
   },
