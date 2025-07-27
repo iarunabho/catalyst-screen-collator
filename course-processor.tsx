@@ -9,26 +9,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Download, FileSpreadsheet, FolderOpen, Upload, HelpCircle } from "lucide-react"
 import JSZip from "jszip"
-
-interface PageData {
-  pageId: string
-  title: string
-  pageType: string
-  fullPageId: string
-  rowNumber: number
-}
-
-"use client"
-
-import type React from "react"
-import { useState, useCallback } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Download, FileSpreadsheet, FolderOpen, Upload, HelpCircle } from "lucide-react"
-import JSZip from "jszip"
 import { Mixpanel } from "@/lib/mixpanel-client"
 
 interface PageData {
@@ -135,7 +115,7 @@ const CourseProcessor: React.FC = () => {
           .replace(/â€"/g, "–") // Fix en dash
           .replace(/Â/g, "") // Remove extra Â characters
           .normalize("NFD") // Normalize Unicode
-          .replace(/[̀-ͯ]/g, "") // Remove combining characters if needed
+          .replace(/[\u0300-\u036f]/g, "") // Remove combining characters if needed
 
         console.log(
           `Processing page ${index + 1}: pageId=${pageId}, type=${pageType}, hidden=${hidden}, title=${title}`,
@@ -230,7 +210,7 @@ const CourseProcessor: React.FC = () => {
               .replace(/â€"/g, "–") // Fix en dash
               .replace(/Â/g, "") // Remove extra Â characters
               .normalize("NFD") // Normalize Unicode
-              .replace(/[̀-ͯ]/g, "") // Remove combining characters if needed
+              .replace(/[\u0300-\u036f]/g, "") // Remove combining characters if needed
 
             // Check for duplicate pageIds
             if (seenPageIds.has(pageId)) {
