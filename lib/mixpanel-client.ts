@@ -1,7 +1,7 @@
 "use client"
 import mixpanel from "mixpanel-browser"
 
-const mixpanelToken = process.env.MIXPANEL_TOKEN
+const mixpanelToken = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN
 
 if (mixpanelToken) {
   mixpanel.init(mixpanelToken, {
