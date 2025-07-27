@@ -93,9 +93,6 @@ const CourseProcessor: React.FC = () => {
         rowNumber: 0, // Changed from 2 to 0
       })
 
-      console.log("Added default Menu and Launch entries")
-      console.log(`Found ${pages.length} page elements and ${adaptiveElements.length} adaptive elements`)
-
       // Process regular pages
       pages.forEach((page, index) => {
         const pageId = page.getAttribute("pageid")
@@ -117,25 +114,18 @@ const CourseProcessor: React.FC = () => {
           .normalize("NFD") // Normalize Unicode
           .replace(/[\u0300-\u036f]/g, "") // Remove combining characters if needed
 
-        console.log(
-          `Processing page ${index + 1}: pageId=${pageId}, type=${pageType}, hidden=${hidden}, title=${title}`,
-        )
-
         // Skip if hidden="true"
         if (hidden === "true") {
-          console.log(`Skipping hidden page: ${pageId}`)
           return
         }
 
         // Skip if no pageId or pageType
         if (!pageId || !pageType) {
-          console.log(`Skipping page with missing pageId or pageType: ${pageId}, ${pageType}`)
           return
         }
 
         // Check for duplicate pageIds
         if (seenPageIds.has(pageId)) {
-          console.log(`Skipping duplicate pageId: ${pageId}`)
           return
         }
         seenPageIds.add(pageId)
@@ -151,8 +141,6 @@ const CourseProcessor: React.FC = () => {
           fullPageId,
           rowNumber: uniquePages.length + 1,
         })
-
-        console.log(`Added regular page: ${fullPageId}`)
       })
 
       // Process adaptive lesson elements (landing, question, result, wrapUp)
@@ -160,11 +148,8 @@ const CourseProcessor: React.FC = () => {
         const pageId = element.getAttribute("pageid")
         const elementType = element.tagName.toLowerCase()
 
-        console.log(`Processing adaptive element ${index + 1}: pageId=${pageId}, elementType=${elementType}`)
-
         // Skip if no pageId
         if (!pageId) {
-          console.log(`Skipping adaptive element with missing pageId: ${elementType}`)
           return
         }
 
@@ -177,13 +162,11 @@ const CourseProcessor: React.FC = () => {
 
             // Only include the first page of each adaptive lesson (adapt_XXX_1)
             if (pageNumber !== "1") {
-              console.log(`Skipping adaptive sub-page: ${pageId}`)
               return
             }
 
             const adaptiveScreenId = `adapt_${lessonNumber}_1`
             if (seenQuizScreens.has(adaptiveScreenId)) {
-              console.log(`Skipping duplicate adaptive screen: ${pageId}`)
               return
             }
             seenQuizScreens.add(adaptiveScreenId)
@@ -197,7 +180,6 @@ const CourseProcessor: React.FC = () => {
               const topicTitleElement = parentTopic.querySelector("title")
               if (topicTitleElement?.textContent?.trim()) {
                 lessonTitle = topicTitleElement.textContent.trim()
-                console.log(`Using lesson title for ${pageId}: ${lessonTitle}`)
               }
             }
 
@@ -214,7 +196,6 @@ const CourseProcessor: React.FC = () => {
 
             // Check for duplicate pageIds
             if (seenPageIds.has(pageId)) {
-              console.log(`Skipping duplicate adaptive pageId: ${pageId}`)
               return
             }
             seenPageIds.add(pageId)
@@ -230,13 +211,10 @@ const CourseProcessor: React.FC = () => {
               fullPageId,
               rowNumber: uniquePages.length + 1,
             })
-
-            console.log(`Added adaptive page: ${fullPageId}`)
           }
         }
       })
 
-      console.log(`Total unique pages processed: ${uniquePages.length}`)
       setProcessedData(uniquePages)
     } catch (err) {
       console.error("Processing error:", err)
