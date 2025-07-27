@@ -24,6 +24,7 @@ export const Mixpanel = {
   },
   track: (name: string, props?: object) => {
     if (mixpanelToken) {
+      console.log("MIXPANEL TRACK", { name, props })
       mixpanel.track(name, props)
     }
   },
