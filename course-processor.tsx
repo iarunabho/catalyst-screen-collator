@@ -253,14 +253,16 @@ const CourseProcessor: React.FC = () => {
   }, [generateCSV, baseCatalogId])
 
   const generateFolderStructure = useCallback(() => {
-    return processedData.map((item, index) => {
+    let pageCounter = 0
+    return processedData.map(item => {
       // Special handling for Menu and Launch - always use "00"
       if (item.pageType === "menu" || item.pageType === "launch") {
         return `00_${baseCatalogId}_${item.pageId}_${item.pageType}`
       }
 
-      // For all other items, use their actual row number with padding
-      const paddedRowNumber = item.rowNumber.toString().padStart(2, "0")
+      pageCounter += 1
+      // For all other items, use an incrementing counter with padding
+      const paddedRowNumber = pageCounter.toString().padStart(2, "0")
       return `${paddedRowNumber}_${baseCatalogId}_${item.pageId}_${item.pageType}`
     })
   }, [processedData, baseCatalogId])
