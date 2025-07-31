@@ -227,15 +227,26 @@ const CourseProcessor: React.FC = () => {
   const generateCSV = useCallback(() => {
     if (processedData.length === 0) return ""
 
-    const headers = ["baseCatalogId_pageid", "title", "page_type"]
-    const rows = processedData.map((item) => [
-      item.fullPageId,
-      `"${item.title.replace(/"/g, '""')}"`, // Escape quotes in CSV
-      item.pageType,
-    ])
+    const headers = ["screen number", "baseCatalogId_pageid", "title", "page_type"]
+    let pageCounter = 0
+    const rows = processedData.map(item => {
+      let screenNumber
+      if (item.pageType === "menu" || item.pageType === "launch") {
+        screenNumber = "00_"
+      } else {
+        pageCounter += 1
+        screenNumber = `${pageCounter.toString().padStart(2, "0")}_`
+      }
+      return [
+        screenNumber,
+        item.fullPageId,
+        `"${item.title.replace(/"/g, '""')}"`, // Escape quotes in CSV
+        item.pageType,
+      ]
+    })
 
     // Add UTF-8 BOM for proper Excel compatibility
-    const csvContent = [headers, ...rows].map((row) => row.join(",")).join("\n")
+    const csvContent = [headers, ...rows].map(row => row.join(",")).join("\n")
     return "\uFEFF" + csvContent // UTF-8 BOM
   }, [processedData])
 
