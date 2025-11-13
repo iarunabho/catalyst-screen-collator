@@ -96,7 +96,7 @@ const CourseProcessor: React.FC = () => {
       // Process regular pages
       pages.forEach((page, index) => {
         const pageId = page.getAttribute("pageid")
-        const pageType = page.getAttribute("type")
+        let pageType = page.getAttribute("type")
         const hidden = page.getAttribute("hidden")
 
         // Get title and clean up encoding issues
@@ -129,6 +129,16 @@ const CourseProcessor: React.FC = () => {
           return
         }
         seenPageIds.add(pageId)
+
+        if (pageType === "contentPage") {
+          if (page.querySelector("slide")) {
+            pageType = "slideshow"
+          } else if (page.getAttribute("gameMode") === "badgeMode" || page.querySelector("gameElements")) {
+            pageType = "gameResult"
+          } else {
+            pageType = "ip-basic"
+          }
+        }
 
         // Get last 6 digits of pageId
         const last6Digits = pageId.slice(-6)
