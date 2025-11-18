@@ -49,7 +49,7 @@ const CourseProcessor: React.FC = () => {
   }, [])
 
   const processXML = useCallback(() => {
-    Mixpanel.track("Process XML Click")
+    // Mixpanel.track("Process XML Click")
     setIsProcessing(true)
     setError("")
 
